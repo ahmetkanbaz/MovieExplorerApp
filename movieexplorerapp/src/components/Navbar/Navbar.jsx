@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { BiCameraMovie } from "react-icons/bi";
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary py-3">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary py-3 sticky-top">
       <div className="container">
         <Link to="/" className="navbar-brand d-flex align-items-center gap-1">
           <BiCameraMovie size='2rem' />
