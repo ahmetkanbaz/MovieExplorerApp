@@ -12,3 +12,13 @@ export const getMovies = async () => {
     console.log(error.message)
   }
 }
+
+export const getSingleMovie = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}?i=${id}&apikey=${apiKEY}`)
+    return response.data
+  }
+  catch (error) {
+    return error
+  }
+}
