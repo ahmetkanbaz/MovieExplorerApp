@@ -1,0 +1,45 @@
+@import "bootstrap/scss/bootstrap";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f0f0f0;
+
+  a {
+    text-decoration: none;
+    color: #000000;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      color: #c78f01;
+    }
+  }
+
+  .tableWrapper {
+    td {
+      padding: 1.33rem 0.5rem;
+    }
+  }
+  
+  .form-control {
+    background-color: "#F0F0F0";
+    transition: all 0.3s ease-in-out;
+    &:focus {
+      box-shadow: none;
+      border: 1px solid #073d87;
+    }
+    &::placeholder {
+      font-size: 0.89rem;
+      font-style: italic;
+      color: "#101010";
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  textarea {
+    resize: none;
+  }
+}
