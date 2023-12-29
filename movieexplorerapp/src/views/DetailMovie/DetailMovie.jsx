@@ -37,8 +37,6 @@ const DetailMovie = () => {
     return <DangerAlert title={error}/>
   }
 
-  console.log(movie)
-
   return (
     <section className="py-5">
       <div className="container">

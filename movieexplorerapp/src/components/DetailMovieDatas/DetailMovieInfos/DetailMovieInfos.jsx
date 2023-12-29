@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { FaStar } from "react-icons/fa";
 import DetailGenreActors from "./DetailGenreActors/DetailGenreActors";
 import DetailDirectorWriter from "./DetailDirectorWriter/DetailDirectorWriter";
+import DetailLanguageCountry from "./DetailLanguageCountry/DetailLanguageCountry";
 
 const DetailMovieInfos = ({ movie }) => {
   const {
@@ -13,8 +14,6 @@ const DetailMovieInfos = ({ movie }) => {
     Actors,
     Genre,
     Plot,
-    Runtime,
-    Type,
     Writer,
     imdbRating,
   } = movie || {};
@@ -41,6 +40,10 @@ const DetailMovieInfos = ({ movie }) => {
 
       {(Director || Writer) && (
         <DetailDirectorWriter director={Director} writer={Writer} />
+      )}
+
+      {(Language || Country) && (
+        <DetailLanguageCountry language={Language} country={Country} />
       )}
     </div>
   );
