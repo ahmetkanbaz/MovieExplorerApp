@@ -4,13 +4,21 @@ import {setLoading, setMovies, setError} from '../redux/slices/movies/moviesSlic
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const apiKEY = import.meta.env.VITE_API_KEY;
 
-export const getMovies = (search = 'Pokemon', year, currentPage) => async (dispatch) => {
+export const getMovies = (search = 'Pokemon', type, year, currentPage) => async (dispatch) => {
   dispatch(setLoading())
   try {
-    const response = await axios.get(
-      `${baseUrl}?s=${search}&page=${currentPage}&y=${year}&apikey=${apiKEY}`
-    );
-    dispatch(setMovies(response.data))
+    if (type) {
+      const response = await axios.get(
+        `${baseUrl}?s=${search}&Type=${type}&page=${currentPage}&y=${year}&apikey=${apiKEY}`
+      );
+      dispatch(setMovies(response.data))
+    }
+    else {
+      const response = await axios.get(
+        `${baseUrl}?s=${search}&page=${currentPage}&y=${year}&apikey=${apiKEY}`
+      );
+      dispatch(setMovies(response.data))
+    }
   } catch (error) {
     dispatch(setError(error.message))
   }

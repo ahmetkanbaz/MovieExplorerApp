@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../common/Loading/Loading";
 import DangerAlert from "../../common/DangerAlert/DangerAlert";
 import { getMovies } from "../../utils/request";
+import FilterItems from "./FilterItems/FilterItems";
 
 const TableMovies = () => {
   const dispatch = useDispatch();
@@ -16,25 +17,18 @@ const TableMovies = () => {
   const itemsPerPage = 10;
 
   const [search, setSearch] = useState("Pokemon");
-  const [year, setYear] = useState('');
+  const [year, setYear] = useState("");
+  const [type, setType] = useState("");
 
   useEffect(() => {
-    dispatch(getMovies(search, year, currentPage))
-  }, [currentPage])
+    dispatch(getMovies(search, type, year, currentPage));
+  }, [type, currentPage]);
 
   console.log(movies);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-
-  const handleSearchChange = (newSearch) => {
-    setSearch(newSearch);
-  };
-
-  const handleGetMovies = () => {
-    dispatch(getMovies(search, year, currentPage))
-  }
 
   if (loading) {
     return <Loading />;
@@ -50,48 +44,55 @@ const TableMovies = () => {
         <div className="py-3">
           <h2>Filmler</h2>
         </div>
-        <div>
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => handleSearchChange(e.target.value)}
-          />
-          <input
-            type="number"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-          />
-          <button onClick={() => handleGetMovies()}>
-            Ara
-          </button>
-        </div>
 
-        <>
-          <div className="overflow-x-auto mt-4">
-            <table className={"table table-striped table-hover w-100"}>
-              <thead>
-                <tr>
-                  <th>Imdb ID</th>
-                  <th>Başlık</th>
-                  <th>Yayınlandığı Tarih</th>
-                  <th>Türü</th>
-                </tr>
-              </thead>
-              <tbody>
-                {movies.Search?.map((singleItem) => (
-                  <TableItem key={singleItem.imdbID} singleItem={singleItem} />
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <Pagination
-            totalResults={movies?.totalResults}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-            setCurrentPage={setCurrentPage}
-            itemsPerPage={itemsPerPage}
-          />
-        </>
+        <FilterItems
+          type={type}
+          setType={setType}
+          search={search}
+          setSearch={setSearch}
+          year={year}
+          setYear={setYear}
+          currentPage={currentPage}
+        />
+
+        {movies?.Response == "False" ? (
+          <DangerAlert title={movies?.Error} />
+        ) : (
+          <>
+            <div className="overflow-x-auto mt-4">
+              <table className={"table table-striped table-hover w-100"}>
+                {movies?.totalResults && (
+                  <caption>
+                    Toplam {movies?.totalResults} adet film bulunmaktadır.
+                  </caption>
+                )}
+                <thead>
+                  <tr>
+                    <th>Imdb ID</th>
+                    <th>Başlık</th>
+                    <th>Yayınlandığı Tarih</th>
+                    <th>Türü</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {movies.Search?.map((singleItem) => (
+                    <TableItem
+                      key={singleItem.imdbID}
+                      singleItem={singleItem}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <Pagination
+              totalResults={movies?.totalResults}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              setCurrentPage={setCurrentPage}
+              itemsPerPage={itemsPerPage}
+            />
+          </>
+        )}
       </div>
     </section>
   );
