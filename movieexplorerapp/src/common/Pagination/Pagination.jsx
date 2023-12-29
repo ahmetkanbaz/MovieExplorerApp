@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import './pagination.scss'
 
-const Pagination = ({ datas, currentPage, onPageChange, setCurrentPage, itemsPerPage }) => {
+const Pagination = ({ totalResults, currentPage, onPageChange, setCurrentPage, itemsPerPage }) => {
 
-  const pageNumbers = Math.ceil(datas && datas.length / itemsPerPage);
+  const pageNumbers = Math.ceil(totalResults / itemsPerPage);
   const maxPageNumbers = 7;
 
   const renderPageNumbers = () => {
@@ -40,7 +40,7 @@ const Pagination = ({ datas, currentPage, onPageChange, setCurrentPage, itemsPer
   };
 
   const nextPage = () => {
-    if (currentPage < Math.ceil(datas.length / itemsPerPage)) {
+    if (currentPage < Math.ceil(totalResults / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
