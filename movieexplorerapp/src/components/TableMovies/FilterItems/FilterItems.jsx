@@ -2,7 +2,15 @@
 import { useDispatch } from "react-redux";
 import { getMovies } from "../../../utils/request";
 
-const FilterItems = ({ type, setType, search, setSearch, year, setYear, currentPage }) => {
+const FilterItems = ({
+  type,
+  setType,
+  search,
+  setSearch,
+  year,
+  setYear,
+  currentPage,
+}) => {
   const dispatch = useDispatch();
   const handleGetMovies = () => {
     dispatch(getMovies(search, type, year, currentPage));
@@ -10,6 +18,7 @@ const FilterItems = ({ type, setType, search, setSearch, year, setYear, currentP
   return (
     <div className="py-3 row align-items-center">
       <div className="col-md-4 col-12">
+        <p className="mb-0">Türü</p>
         <div className="d-flex align-items-center gap-4 flex-wrap">
           <div className="form-check">
             <input
@@ -18,7 +27,7 @@ const FilterItems = ({ type, setType, search, setSearch, year, setYear, currentP
               name="movie"
               id="movie"
               onChange={(e) => setType(e.target.id)}
-              checked = {type == 'movie'}
+              checked={type == "movie"}
             />
             <label className="form-check-label" htmlFor="movie">
               Film
@@ -31,7 +40,7 @@ const FilterItems = ({ type, setType, search, setSearch, year, setYear, currentP
               name="series"
               id="series"
               onChange={(e) => setType(e.target.id)}
-              checked = {type == 'series'}
+              checked={type == "series"}
             />
             <label className="form-check-label" htmlFor="series">
               Dizi
@@ -44,7 +53,7 @@ const FilterItems = ({ type, setType, search, setSearch, year, setYear, currentP
               name="episode"
               id="episode"
               onChange={(e) => setType(e.target.id)}
-              checked = {type == 'episode'}
+              checked={type == "episode"}
             />
             <label className="form-check-label" htmlFor="episode">
               Bölüm
@@ -78,7 +87,12 @@ const FilterItems = ({ type, setType, search, setSearch, year, setYear, currentP
               placeholder="Filmin yılını giriniz..."
             />
           </div>
-          <button onClick={() => handleGetMovies()}>Ara</button>
+          <button
+            onClick={() => handleGetMovies()}
+            className="btn btn-info px-5 align-self-end"
+          >
+            Ara
+          </button>
         </div>
       </div>
     </div>

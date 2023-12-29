@@ -63,7 +63,7 @@ const TableMovies = () => {
               <table className={"table table-striped table-hover w-100"}>
                 {movies?.totalResults && (
                   <caption>
-                    Toplam {movies?.totalResults} adet film bulunmaktadır.
+                    Tabloda toplam {movies?.totalResults} adet veri bulunmaktadır.
                   </caption>
                 )}
                 <thead>
