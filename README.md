@@ -7,7 +7,7 @@ MovieExplorerApp, popüler filmleri ve dizileri keşfetmek için kullanılan bas
 1. Proje dosyalarını indirin:
 
 ```bash
-git clone https://github.com/kullaniciadi/MovieExplorerApp.git
+git clone https://github.com/ahmetkanbaz/MovieExplorerApp.git
 ```
 
 2. Proje dizinine gidin:
