@@ -1,10 +1,11 @@
+import FooterBottom from "./FooterBottom/FooterBottom";
 import FooterCommunication from "./FooterCommunication/FooterCommunication";
 import FooterInfo from "./FooterInfo/FooterInfo";
 import FooterSocial from "./FooterSocial/FooterSocial";
 
 const Footer = () => {
   return (
-    <footer className="py-5">
+    <footer className="pt-5 bg-body-tertiary">
       <div className="container">
         <div className="row">
           <FooterInfo />
@@ -12,6 +13,7 @@ const Footer = () => {
           <FooterCommunication />
         </div>
       </div>
+      <FooterBottom />
     </footer>
   );
 };

@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import {FaMedium} from 'react-icons/fa6'
 const FooterSocial = () => {
   return (
-    <div className="col-md-4 col-sm-6 col-12 d-flex flex-column align-items-center">
+    <div className="col-md-4 col-sm-6 col-12 d-flex flex-column align-items-md-center mt-md-0 mt-4">
       <h4>Sosyal Medya</h4>
       <div className="d-flex align-items-center flex-wrap mt-3 gap-3">
         <a
