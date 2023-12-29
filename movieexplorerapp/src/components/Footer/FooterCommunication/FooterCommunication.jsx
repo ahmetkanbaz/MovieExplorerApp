@@ -3,7 +3,7 @@ import { FaPhone } from "react-icons/fa";
 import {IoLocation} from 'react-icons/io5'
 const FooterCommunication = () => {
   return (
-    <div className="col-md-4 col-12">
+    <div className="col-md-4 col-sm-6 col-12 mt-md-0 mt-4">
       <h4>İletişim Bilgileri</h4>
       <div className="mt-4">
         <a href="tel:05383535673">

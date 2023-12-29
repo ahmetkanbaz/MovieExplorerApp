@@ -24,8 +24,6 @@ const TableMovies = () => {
     dispatch(getMovies(search, type, year, currentPage));
   }, [type, currentPage]);
 
-  console.log(movies);
-
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
