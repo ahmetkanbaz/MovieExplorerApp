@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Pagination from "../../common/Pagination/Pagination";
 import TableItem from "./TableItem/TableItem";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../../common/Loading/Loading";
+import DangerAlert from "../../common/DangerAlert/DangerAlert";
+import { getMovies } from "../../utils/request";
 
 const TableMovies = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.movies.loading);
+  const movies = useSelector((state) => state.movies.movies);
+  const error = useSelector((state) => state.movies.error);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -14,47 +23,53 @@ const TableMovies = () => {
 
   // const visibleCourses = sortedCourses.slice(startIndex, endIndex);
 
-  const singleItem = {
-    Title: "Guardians of the Galaxy Vol. 2",
-    Year: "2017",
-    Rated: "PG-13",
-    Released: "05 May 2017",
-    Runtime: "136 min",
-    Genre: "Action, Adventure, Comedy",
-    Director: "James Gunn",
-    Writer: "James Gunn, Dan Abnett, Andy Lanning",
-    Actors: "Chris Pratt, Zoe Saldana, Dave Bautista",
-    Plot: "The Guardians struggle to keep together as a team while dealing with their personal family issues, notably Star-Lord's encounter with his father, the ambitious celestial being Ego.",
-    Language: "English",
-    Country: "United States",
-    Awards: "Nominated for 1 Oscar. 15 wins & 60 nominations total",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg",
-    Ratings: [
-      { Source: "Internet Movie Database", Value: "7.6/10" },
-      { Source: "Rotten Tomatoes", Value: "85%" },
-      { Source: "Metacritic", Value: "67/100" },
-    ],
-    Metascore: "67",
-    imdbRating: "7.6",
-    imdbVotes: "741,862",
-    imdbID: "tt3896198",
-    Type: "movie",
-    DVD: "10 Jul 2017",
-    BoxOffice: "$389,813,101",
-    Production: "N/A",
-    Website: "N/A",
-    Response: "True",
-  };
+  const [searchTerm, setSearchTerm] = useState("Pokemon");
+  const [selectedYear, setSelectedYear] = useState('');
+
+  console.log(movies);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <DangerAlert title={error} />;
+  }
+
+  const handleSearchChange = (newSearchTerm) => {
+    // Kullanıcı etkileşimi ile arama terimini güncelle
+    setSearchTerm(newSearchTerm);
+  };
+
+  const handleGetMovies = () => {
+    dispatch(getMovies(searchTerm, selectedYear, currentPage))
+  }
+
   return (
     <section className="py-5">
       <div className="container">
         <div className="py-3">
           <h2>Filmler</h2>
+        </div>
+        <div>
+          {/* State'leri güncellemek için gerekli kontrolleri ekleyebilirsiniz */}
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => handleSearchChange(e.target.value)}
+          />
+          <input
+            type="number"
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
+          />
+          <button onClick={() => handleGetMovies()}>
+            Sonraki Sayfa
+          </button>
         </div>
 
         <>
@@ -65,21 +80,18 @@ const TableMovies = () => {
                   <th>Imdb ID</th>
                   <th>Başlık</th>
                   <th>Yayınlandığı Tarih</th>
-                  <th>Imdb Rating</th>
+                  <th>Türü</th>
                 </tr>
               </thead>
               <tbody>
-                {/* {visibleNews.map((singleItem) => ( */}
-                <TableItem
-                  // key={singleItem.imdbID}
-                  singleItem={singleItem}
-                />
-                {/* // ))} */}
+                {movies.Search?.map((singleItem) => (
+                  <TableItem key={singleItem.imdbID} singleItem={singleItem} />
+                ))}
               </tbody>
             </table>
           </div>
           <Pagination
-            // datas={selectedNews}
+            totalResults={movies?.totalResults}
             currentPage={currentPage}
             onPageChange={handlePageChange}
             setCurrentPage={setCurrentPage}

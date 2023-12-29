@@ -1,13 +1,18 @@
 import axios from "axios";
+import {setLoading, setMovies, setError} from '../redux/slices/movies/moviesSlice'
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const apiKEY = import.meta.env.VITE_API_KEY;
-export const getMovies = async (search = 'Pokemon') => {
+
+export const getMovies = (search = 'Pokemon', year, currentPage) => async (dispatch) => {
+  dispatch(setLoading())
   try {
-    const response = await axios.get(`${baseUrl}?s=${search}&apikey=cc3be543`);
-    console.log(response.data);
+    const response = await axios.get(
+      `${baseUrl}?s=${search}&page=${currentPage}&y=${year}&apikey=${apiKEY}`
+    );
+    dispatch(setMovies(response.data))
   } catch (error) {
-    console.log(error.message);
+    dispatch(setError(error.message))
   }
 };
 

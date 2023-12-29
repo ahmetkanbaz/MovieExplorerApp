@@ -11,9 +11,10 @@ function App() {
 
   useEffect(() => {
     if (!movies.length) {
-      getMovies()
+      dispatch(getMovies())
     }
   }, [])
+  
   return (
     <>
       <Navbar />
