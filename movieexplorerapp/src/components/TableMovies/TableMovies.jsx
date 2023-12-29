@@ -15,22 +15,26 @@ const TableMovies = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  // const sortedCourses = [...allCourses].sort((a, b) => {
-  //   return new Date(b.courseStartDate) - new Date(a.courseStartDate);
-  // });
-
-  // const visibleCourses = sortedCourses.slice(startIndex, endIndex);
-
   const [searchTerm, setSearchTerm] = useState("Pokemon");
   const [selectedYear, setSelectedYear] = useState('');
+
+  useEffect(() => {
+    dispatch(getMovies(searchTerm, selectedYear, currentPage))
+  }, [currentPage])
 
   console.log(movies);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+
+  const handleSearchChange = (newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+  };
+
+  const handleGetMovies = () => {
+    dispatch(getMovies(searchTerm, selectedYear, currentPage))
+  }
 
   if (loading) {
     return <Loading />;
@@ -40,15 +44,6 @@ const TableMovies = () => {
     return <DangerAlert title={error} />;
   }
 
-  const handleSearchChange = (newSearchTerm) => {
-    // Kullanıcı etkileşimi ile arama terimini güncelle
-    setSearchTerm(newSearchTerm);
-  };
-
-  const handleGetMovies = () => {
-    dispatch(getMovies(searchTerm, selectedYear, currentPage))
-  }
-
   return (
     <section className="py-5">
       <div className="container">
@@ -56,7 +51,6 @@ const TableMovies = () => {
           <h2>Filmler</h2>
         </div>
         <div>
-          {/* State'leri güncellemek için gerekli kontrolleri ekleyebilirsiniz */}
           <input
             type="text"
             value={searchTerm}
@@ -68,7 +62,7 @@ const TableMovies = () => {
             onChange={(e) => setSelectedYear(e.target.value)}
           />
           <button onClick={() => handleGetMovies()}>
-            Sonraki Sayfa
+            Ara
           </button>
         </div>
 
