@@ -3,27 +3,25 @@ import Loading from "../../../../common/Loading/Loading";
 import ListItem from "./ListItem/ListItem";
 
 const DetailGenreActors = ({ actors, genre }) => {
-  if (
-    typeof actors !== "string" ||
-    actors.trim() === "" ||
-    typeof genre !== "string" ||
-    genre.trim() === ""
-  ) {
+  if (!actors || !genre) {
     return <Loading />;
   }
+
   const actorsSplit = actors.split(",");
   const genreSplit = genre.split(",");
-  
+
   return (
-    <div className="my-3 d-flex align-items-center justify-content-evenly">
+    <div className="my-3 d-flex justify-content-evenly">
       {actors && (
-        <div className="">
-          <ListItem title="Oyuncular" split={actorsSplit} />
+        <div>
+          <h5 className="fw-bold mb-3">Oyuncular</h5>
+          <ListItem split={actorsSplit} />
         </div>
       )}
       {genre && (
-        <div className="">
-          <ListItem title="Film Türü" split={genreSplit} />
+        <div>
+          <h5 className="fw-bold mb-3">Film Türü</h5>
+          <ListItem split={genreSplit} />
         </div>
       )}
     </div>
