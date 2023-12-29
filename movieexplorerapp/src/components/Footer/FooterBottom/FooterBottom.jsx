@@ -1,7 +1,7 @@
 const FooterBottom = () => {
   return (
     <div className="border-top py-4 mt-4 text-center">
-      <p className="mb-0">
+      <p>
         Bu proje
         <a
           href="https://github.com/ahmetkanbaz"
