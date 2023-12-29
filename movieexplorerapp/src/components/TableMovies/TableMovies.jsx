@@ -15,11 +15,11 @@ const TableMovies = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const [searchTerm, setSearchTerm] = useState("Pokemon");
-  const [selectedYear, setSelectedYear] = useState('');
+  const [search, setSearch] = useState("Pokemon");
+  const [year, setYear] = useState('');
 
   useEffect(() => {
-    dispatch(getMovies(searchTerm, selectedYear, currentPage))
+    dispatch(getMovies(search, year, currentPage))
   }, [currentPage])
 
   console.log(movies);
@@ -28,12 +28,12 @@ const TableMovies = () => {
     setCurrentPage(newPage);
   };
 
-  const handleSearchChange = (newSearchTerm) => {
-    setSearchTerm(newSearchTerm);
+  const handleSearchChange = (newSearch) => {
+    setSearch(newSearch);
   };
 
   const handleGetMovies = () => {
-    dispatch(getMovies(searchTerm, selectedYear, currentPage))
+    dispatch(getMovies(search, year, currentPage))
   }
 
   if (loading) {
@@ -53,13 +53,13 @@ const TableMovies = () => {
         <div>
           <input
             type="text"
-            value={searchTerm}
+            value={search}
             onChange={(e) => handleSearchChange(e.target.value)}
           />
           <input
             type="number"
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
           />
           <button onClick={() => handleGetMovies()}>
             Ara
