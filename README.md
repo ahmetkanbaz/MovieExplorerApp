@@ -49,6 +49,9 @@ Tabloda, kullanıcı detayını görmek istediği filmin adının üstüne tıkl
 - Yeni bir özellik ekleyin veya hata düzeltin.
 - Yaptığınız değişiklikleri içeren bir pull request oluşturun.
 
+#### Netlify Linki
+Projemi tamamladıktan sonra Netlify üzerinden canlıya aldım. [MovieExplorerApp](https://movieexplorerapp.netlify.app/) projemin canlı versiyonunu inceleyebilirsiniz.
+
 #### Github Linki
 GitHub profilime ulaşabilmek için: [Ahmet Kanbaz](https://github.com/ahmetkanbaz)
 
