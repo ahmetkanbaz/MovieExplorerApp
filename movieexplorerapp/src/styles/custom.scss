@@ -42,4 +42,14 @@ body {
   textarea {
     resize: none;
   }
+
+  .notableAuthors {
+    background-color: #F5F5F5;
+
+    a {
+      &:hover {
+        transform: translateY(-10px);
+      }
+    }
+  }
 }
